@@ -12,8 +12,7 @@ public class constructor{
     public String tipo_calzado;
     private int id;
     public String tipo_persona;
-    public int cantidad;
-    
+    public int cant;
     public constructor(){
     talla = 0;
     color = "";
@@ -21,42 +20,26 @@ public class constructor{
     tipo_calzado = "";
     id = 0;
     tipo_persona = "";
-    cantidad = 0;
-    
+    cant = 0;
     }
-    public void agregar(int id,int talla,int cantidad,String color,String marca,String tipo_calzado,String tipo_persona){
+    public void agregar(int id,int cant,int talla,String color,String marca,String tipo_calzado,String tipo_persona){
         this.id = id;
         this.talla = talla;
-        this.cantidad = cantidad;
+        this.cant = cant;
         this.color = color;
         this.marca = marca;
         this.tipo_calzado = tipo_calzado; // tipo de calzado
         this.tipo_persona = tipo_persona;
     }
-    /*public void set_id(int id){
-        this.id = id;
-    }
-    public void set_talla(int talla){
-        this.talla = talla;
-    }
-   
-    public void set_color(String color){
-        this.color = color;
-    }
-    public void set_marca(String marca){
-        this.marca = marca;
-    }
-    public void set_tipo(String tipo){ //calzado ejem: chancla,sandalia etc..
-        this.tipo_calzado = tipo;
-    }*/
+    
     public int get_id(){
         return id;
     }
+    public int get_cant_pares(){
+        return cant;
+    }
     public int get_talla(){
         return talla;
-    }
-    public int get_cantidad(){
-        return cantidad;
     }
     public String get_color(){
         return color;
@@ -64,9 +47,15 @@ public class constructor{
     public String get_marca(){
         return marca;
     }
+    
+    public String get_tipo_calzado(){
+        return tipo_calzado;
+    }
+    
     public String get_tipo_persona(){
         return tipo_persona;
     }
+    
 
 }
 

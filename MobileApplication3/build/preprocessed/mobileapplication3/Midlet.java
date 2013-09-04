@@ -13,8 +13,9 @@ import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Form;
+import javax.microedition.lcdui.ItemStateListener;
 import javax.microedition.lcdui.List;
-import javax.microedition.lcdui.TextField;
+import javax.microedition.lcdui.StringItem;
 import javax.microedition.lcdui.Ticker;
 import javax.microedition.midlet.*;
 
@@ -31,8 +32,8 @@ public class Midlet extends MIDlet implements CommandListener {
    public String numeracion_adulto[] = {"35","36","37","38","39","40","41","42","43","44","45"};
    public String tipo_producto[] = {"chancla","sandalia","teniz","convers","bota","zapato"};
    public String marca[] = {"Venus","Hunt","Xirera","Panema","Novaflex","Sport","CC"};
-   public Command btn_enviar,btn_salir,btn_enviar2,btn_salir2,btn_enviar3,btn_salir3;
-   public TextField item;
+   public Command btn_enviar,btn_salir,btn_enviar2;
+   public StringItem item;
    constructor objeto;
    public Form f1,f2,f3,f4,f5;
    Display pantalla;
@@ -49,7 +50,7 @@ public class Midlet extends MIDlet implements CommandListener {
    public void pantalla_principal(){
             pantalla = Display.getDisplay(this);      
             f1 = new Form("Opcion....");
-            btn_enviar = new Command("Enviar", Command.OK, 0);
+            btn_enviar2 = new Command("Enviar", Command.OK, 0);
             btn_salir = new Command("Salir",Command.EXIT,1);
             choice_principal = new ChoiceGroup("Tipo de persona", ChoiceGroup.EXCLUSIVE);
             choice_principal.append("Hombre",null);
@@ -57,7 +58,7 @@ public class Midlet extends MIDlet implements CommandListener {
             choice_principal.append("Niño",null);
             choice_principal.append("Niña",null);
             f1.append(choice_principal);
-            f1.addCommand(btn_enviar);
+            f1.addCommand(btn_enviar2);
             f1.addCommand(btn_salir);
             f1.setCommandListener(this);
             crearTicker("Seleccionar el tipo de persona",f1);
@@ -81,7 +82,7 @@ public class Midlet extends MIDlet implements CommandListener {
    }
    public void pantalla_hombre(){
             pantalla = Display.getDisplay(this);
-            item = new TextField("Codigo","",8,TextField.DECIMAL);            
+            item = new StringItem("ID Producto","Item");            
             f2 = new Form("Hombre...");
             choice_hombre = new ChoiceGroup("numeracion",ChoiceGroup.POPUP, numeracion_adulto,null);         
             choice_color = new ChoiceGroup("Color",ChoiceGroup.POPUP,color,null);
@@ -89,6 +90,7 @@ public class Midlet extends MIDlet implements CommandListener {
             choice_tipo = new ChoiceGroup("Tipo de calzado : ",ChoiceGroup.POPUP,tipo_producto,null);
             btn_enviar = new Command("Enviar", Command.OK, 0);
             btn_salir = new Command("Salir",Command.EXIT,1);
+            
             f2.append(item);
             f2.append(choice_hombre);
             f2.append(choice_color);
@@ -96,7 +98,6 @@ public class Midlet extends MIDlet implements CommandListener {
             f2.append(choice_tipo);
             f2.addCommand(btn_enviar);
             f2.addCommand(btn_salir);
-            f2.setCommandListener(this);
             pantalla.setCurrent(f2);
     }
     public void pantalla_mujer(){
@@ -108,15 +109,14 @@ public class Midlet extends MIDlet implements CommandListener {
             choice_tipo = new ChoiceGroup("Tipo de calzado : ",ChoiceGroup.POPUP,tipo_producto,null);
             btn_enviar = new Command("Enviar", Command.OK, 0);
             btn_salir = new Command("Salir",Command.EXIT,1);
-            item = new TextField("Codigo","",8,TextField.DECIMAL); 
+            item = new StringItem("ID Producto","Item");
             f3.append(item);
-            f3.append(choice_hombre);
+            f3.append(choice_mujer);
             f3.append(choice_color);
             f3.append(choice_marca);
             f3.append(choice_tipo);
             f3.addCommand(btn_enviar);
             f3.addCommand(btn_salir);
-            f3.setCommandListener(this);
             pantalla.setCurrent(f3);
     }
     public void pantalla_niño(){
@@ -130,27 +130,26 @@ public class Midlet extends MIDlet implements CommandListener {
             choice_tipo = new ChoiceGroup("Tipo de calzado : ",ChoiceGroup.POPUP,tipo_producto,null);
             btn_enviar = new Command("Enviar", Command.OK, 0);
             btn_salir = new Command("Salir",Command.EXIT,1);
-            item = new TextField("Codigo","",8,TextField.DECIMAL); 
+            item = new StringItem("ID Producto","Item");
             f4.append(item);
-            f4.append(choice_niño);
+            f4.append(choice_mujer);
             f4.append(choice_color);
             f4.append(choice_marca);
             f4.append(choice_tipo);
             f4.addCommand(btn_enviar);
             f4.addCommand(btn_salir);
-            f4.setCommandListener(this);
             pantalla.setCurrent(f4);    
     }
      public void pantalla_niña(){
             pantalla = Display.getDisplay(this);
-            f5 = new Form("Niña...");
+            f4 = new Form("Niña...");
             choice_niño = new ChoiceGroup("Niño", ChoiceGroup.POPUP, numeracion_niño, null);
             choice_color = new ChoiceGroup("Color",ChoiceGroup.POPUP,color,null);
             choice_marca = new ChoiceGroup("Marca",ChoiceGroup.POPUP,marca,null);
             choice_tipo = new ChoiceGroup("Tipo de calzado : ",ChoiceGroup.POPUP,tipo_producto,null);
             btn_enviar = new Command("Enviar", Command.OK, 0);
             btn_salir = new Command("Salir",Command.EXIT,1);
-            item = new TextField("Codigo","",8,TextField.DECIMAL); 
+            item = new StringItem("ID Producto","Item");
             f5.append(item);
             f5.append(choice_niño);
             f5.append(choice_color);
@@ -158,13 +157,12 @@ public class Midlet extends MIDlet implements CommandListener {
             f5.append(choice_tipo);
             f5.addCommand(btn_enviar);
             f5.addCommand(btn_salir);
-            f5.setCommandListener(this);
-            pantalla.setCurrent(f5);
+            pantalla.setCurrent(f4);
             
     }
      public void transformacion(){
                           
-                  this.item_ = Integer.parseInt(item.getString()); 
+                  this.item_ = Integer.parseInt(item.getText()); 
                   int tipo_color = choice_color.getSelectedIndex();
                   this.tipo_color_s = choice_color.getString(tipo_color);
                   int tipo_marca = choice_marca.getSelectedIndex();
@@ -238,30 +236,26 @@ public class Midlet extends MIDlet implements CommandListener {
                     }
 //_________________________________________________________________________________
        if(d == f1){
-            if(c == btn_enviar){ //btn_enviar2
+            if(c == btn_enviar2){ //btn_enviar2
                int num2 = choice_principal.getSelectedIndex();
-               Alerta("Si funciona",""+ num2);
+               Alerta("Si funciona","");
                 
                 switch(num2){
                     case 0:
                          pantalla_hombre();
-                         Alerta("Si funciona",""+ num2);
                         break;
                     case 1:
                          pantalla_mujer();
-                         Alerta("Si funciona",""+ num2);
                         break;
                     case 2:
                          pantalla_niño();
-                         Alerta("Si funciona",""+ num2);
                         break;
                     case 3:
                          pantalla_niña();
-                         Alerta("Si funciona",""+ num2);
                         break;
                 }
             }if(c == btn_salir) {
-                Alerta("Saliendo","");
+                Alerta("Saliendo","hasta la vista");
                 escoger();
             }//btn_enviar = null;
              //btn_salir = null;
@@ -269,23 +263,23 @@ public class Midlet extends MIDlet implements CommandListener {
 //________________________________________________________________________________
         if(d == f2){ // hombre
             if(c == btn_enviar){
-                int tallaje1 =  choice_hombre.getSelectedIndex();
-                this.tipo_talla = choice_hombre.getString(tallaje1);   // tallaje         
+                int tallaje =  choice_hombre.getSelectedIndex();
+                this.tipo_talla = choice_hombre.getString(tallaje);   // tallaje         
                 Alerta("Enviado..","Procesando");
                 transformacion();
             
             
-            }if(c == btn_salir3){
+            }if(c == btn_salir){
              //   btn_enviar = null;
             escoger();
-              }
+        }
             }
 //________________________________________________________________________________
             if(d == f3){ // mujer
                 if(c == btn_enviar){
                 
-                  int tallaje2 =  choice_hombre.getSelectedIndex();
-                  this.tipo_talla = choice_hombre.getString(tallaje2);
+                  int tallaje =  choice_hombre.getSelectedIndex();
+                  this.tipo_talla = choice_hombre.getString(tallaje);
                   Alerta("Enviado..","Procesando");
                   transformacion();
                 
@@ -296,9 +290,9 @@ public class Midlet extends MIDlet implements CommandListener {
 //_________________________________________________________________________________
             if(d == f4){ // niño
                 if(c == btn_enviar){
-                    int tallaje3 = choice_niño.getSelectedIndex();
-                    this.tipo_talla = choice_niño.getString(tallaje3);
-                    Alerta("Enviado..",""+tallaje3);
+                    int tallaje = choice_niño.getSelectedIndex();
+                    this.tipo_talla = choice_niño.getString(tallaje);
+                    Alerta("Enviado..","Procesando");
                     transformacion();
                 }if(c == btn_salir){
                     escoger();
@@ -307,11 +301,10 @@ public class Midlet extends MIDlet implements CommandListener {
 //_________________________________________________________________________________
             if(d == f5){ // niña
                 if(c == btn_enviar){
+                    int tallaje = choice_niño.getSelectedIndex();
+                    this.tipo_talla = choice_niño.getString(tallaje);
                     Alerta("Enviado..","Procesando");
-                  //  int tallaje4 = choice_niño.getSelectedIndex();
-                   // this.tipo_talla =  choice_niño.getString(tallaje4);
-                    
-                    //transformacion();
+                    transformacion();
                 }if(c == btn_salir){
                   escoger();
                 }

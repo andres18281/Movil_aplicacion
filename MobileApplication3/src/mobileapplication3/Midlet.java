@@ -43,7 +43,7 @@ public class Midlet extends MIDlet implements CommandListener {
    int num;
    int item_;
    RecordStore rs;
-   TableItem table;
+   byte[] registro;
   
    
   //  Alert alertMensaje;
@@ -191,17 +191,21 @@ public class Midlet extends MIDlet implements CommandListener {
                   int talla = Integer.parseInt(this.tipo_talla);
                   int cant_pares = Integer.parseInt(cantidad_pares.getString());
                   
-               //   objeto = new constructor();
+               //   objeto = new constructor();cant_pares
                  //int id,int talla,String color,String marca,String tipo_calzado,String tipo_persona
-              //   objeto.agregar(item_,cant_pares, talla, tipo_color_s, tipo_marca_s,tipo_calzado_,tipo_persona_);
-               //  vector.addElement(objeto);
+                objeto.agregar(item_,cant_pares,talla, tipo_color_s, tipo_marca_s,tipo_calzado_,tipo_persona_);
+                vector.addElement(objeto);
                   addRecord(item_, talla,cant_pares, tipo_color_s, tipo_marca_s,tipo_calzado_,tipo_persona_);
                  
      }
      public void addRecord(int item,int talla,int cant_pares,String color,String marca,String tipo_calzado,String tipo_persona){
-     
+     try{
+         rs = RecordStore.openRecordStore("Almacen", true);
+        }catch (RecordStoreException e){
+            Alerta("RecordStore","Problemas al crear el registro");
+     }
          
-        byte[] registro;
+        
         ByteArrayOutputStream baos;
         DataOutputStream dos;
         try{
@@ -223,13 +227,7 @@ public class Midlet extends MIDlet implements CommandListener {
             Alerta("Almacenaje","" +e);
         }
      }
-     public void crear_RecordStore(){
-        try{
-         rs = RecordStore.openRecordStore("Almacen", true);
-        }catch (RecordStoreException e){
-            Alerta("RecordStore","Problemas al crear el registro");
-     }
-     }
+     
      
      
      public void mostrar_tablas(){

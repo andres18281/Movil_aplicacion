@@ -30,21 +30,7 @@ public class constructor{
         this.tipo_calzado = tipo_calzado; // tipo de calzado
         this.tipo_persona = tipo_persona;
     }
-    public void set_id(int id){
-        this.id = id;
-    }
-    public void set_talla(int talla){
-        this.talla = talla;
-    }
-    public void set_color(String color){
-        this.color = color;
-    }
-    public void set_marca(String marca){
-        this.marca = marca;
-    }
-    public void set_tipo(String tipo){ //calzado ejem: chancla,sandalia etc..
-        this.tipo_calzado = tipo;
-    }
+    
     public int get_id(){
         return id;
     }
@@ -57,9 +43,15 @@ public class constructor{
     public String get_marca(){
         return marca;
     }
+    
+    public String get_tipo_calzado(){
+        return tipo_calzado;
+    }
+    
     public String get_tipo_persona(){
         return tipo_persona;
     }
+    
 
 }
 
